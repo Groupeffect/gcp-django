@@ -27,7 +27,8 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
-
+SUPABASE_URL = os.environ.get("SUPABASE_URL", 'supabase_url')
+SUPABASE_TOKEN = os.environ.get("SUPABASE_TOKEN", 'supabase_token')
 
 # Application definition
 
