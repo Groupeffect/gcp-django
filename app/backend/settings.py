@@ -9,27 +9,38 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
+from corsheaders.defaults import default_methods
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "amir")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "mail@groupeffect.de")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "12345678qw")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-x4$7n%nj*4tc9z@e+dkrcu9!@%-riw#i4sd(=a1my!l8v8iv@7"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-x4$7n%nj*4tc9z@e+dkrcu9!@%-riw#i4sd(=a1my!l8v8iv@7"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = True  # os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
-CORS_ORIGIN_ALLOW_ALL = True
-SUPABASE_URL = os.environ.get("SUPABASE_URL", 'supabase_url')
-SUPABASE_TOKEN = os.environ.get("SUPABASE_TOKEN", 'supabase_token')
+SERVICE_BASE_URL = os.environ.get(
+    "SERVICE_BASE_URL", "http://localhost:" + os.environ.get("PORT", "8080")
+)
+SERVICE_BRANDING = os.environ.get("SERVICE_BRANDING", "Groupeffect")
 
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "supabase_url")
+SUPABASE_TOKEN = os.environ.get("SUPABASE_TOKEN", "supabase_token")
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,13 +50,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_filters",
+    "corsheaders",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",
     "api",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -58,7 +75,7 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "api/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -66,6 +83,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "api.context_processors.environments",
             ],
         },
     },
@@ -120,8 +138,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+    "http://localhost",
+]
+
+CORS_ALLOW_METHODS = (*default_methods,)
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "Access-Control-Allow-Origin",
+)
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1260),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=4),
+}

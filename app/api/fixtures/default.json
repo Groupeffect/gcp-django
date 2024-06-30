@@ -1,0 +1,237 @@
+{
+    "assetsJson": [
+        {
+            "name": "contact_profile",
+            "tags": [
+                "ContactPage"
+            ],
+            "json": {
+                "person":{
+                    "name": "Amir Yousefi",
+                    "email": "mail@groupeffect.de",
+                    "description": "Software Engineer",
+                    "picture": "http://localhost/media/pictures/contact.png",
+                    "location": "Cologne, Germany"
+                },
+                "education": [
+                    {
+                        "title": "Master of Science",
+                        "description": "Geoscience & Sensor Networks",
+                        "location": "University of Koblenz-Landau"
+                    },
+                    {
+                        "title": "Bachelor of Science",
+                        "description": "Environment & Ressource Management",
+                        "location": "Martin-Luther-University in Halle/Saale"
+                    }
+                ],
+                "work": [
+                    {
+                        "title": "Ambient Innovation GmbH",
+                        "position": "Software developer",
+                        "description": "Digital Agency",
+                        "location": "Cologne",
+                        "activities": "CD/CI, Web development, Mobile development"
+                    }
+                ],
+                "skills": [
+                    {
+                        "title": "Programming",
+                        "description": "Linux, Python, Javascript, SQL, HTML, CSS, RDF, Shell"
+                    }
+                ]
+
+            }
+        }
+    ],
+    "tags": [
+        {
+            "name": "mosaik",
+            "description": "good for mosaik component"
+        },
+        {
+            "name": "LandingPage",
+            "description": "show only on landing page component"
+        },
+        {
+            "name": "AboutPage",
+            "description": "show only on about page component"
+        },
+        {
+            "name": "ContactPage",
+            "description": "show only on contact page component"
+        },
+        {
+            "name": "ServicePage",
+            "description": "show only on service page component"
+        },
+        {
+            "name": "service",
+            "description": "related to services"
+        },
+        {
+            "name": "Card",
+            "description": "show in card component"
+        }
+    ],
+    "text": [
+        {
+            "tag": "LandingPage",
+            "text": "Welcome to the digital world of tomorrow"
+        },
+        {
+            "tag": "LandingPage",
+            "text": "+ Web hosting"
+        },
+        {
+            "tag": "LandingPage",
+            "text": "+ Business solutions"
+        },
+        {
+            "tag": "LandingPage",
+            "text": "+ Consulting"
+        },
+        {
+            "tag": "AboutPage",
+            "text": "+ Groupeffect is a digital agency based in Cologne, Germany."
+        },
+        {
+            "tag": "AboutPage",
+            "text": "+ We offer a wide range of services, from web hosting to business solutions and consulting."
+        },
+        {
+            "tag": "AboutPage",
+            "text": "+ Our team of experts is ready to help you with your digital needs."
+        },
+        {
+            "tag": "AboutPage",
+            "text": "+ Contact us today to learn more."
+        },
+        {
+            "tag": "ContactPage",
+            "text": "CONTACT"
+        },
+        {
+            "tag": "ContactPage",
+            "text": "+ Amir Yousefi"
+        },
+        {
+            "tag": "ContactPage",
+            "text": "+ mail@groupeffect.de"
+        },
+        {
+            "tag": "service",
+            "text": "Infrastructures like GCP, AWS, Azure, OCI, Digital Ocean, Hetzner, Ionons etc."
+        },
+        {
+            "tag": "ServicePage",
+            "text": "SERVICES"
+        },
+        {
+            "tag": "ServicePage",
+            "text": "+ Cloud Provider: AWS, GCP, Azure, OCI"
+        },
+        {
+            "tag": "ServicePage",
+            "text": "+ E-Mail Hosting: Private, Business, Enterprise"
+        },
+        {
+            "tag": "ServicePage",
+            "text": "+ Development: Web, Mobile, Desktop"
+        }
+    ],
+    "pictures": [
+        {
+            "name": "contact.png",
+            "tags": [
+                "ContactPage"
+            ]
+        }
+    ],
+    "cards": [
+        {
+            "name": "Github",
+            "title": "Github Hosting",
+            "text": "We offer a wide range of services, like web hosting  and managing solutions with Github. Checkout our repositories for example this site you are looking at is hosted with github pages and can also be yours if you fork it.",
+            "picture": "github_service.png",
+            "tags": [
+                "ServicePage"
+            ],
+            "links": [
+                {
+                    "link": "https://github.com/Groupeffect",
+                    "title": "Groupeffect",
+                    "icon": "mdi-github"
+                }
+            ]
+        },
+        {
+            "name": "Google",
+            "title": "Google Cloud Project",
+            "text": "Use the power of google services, we configure your workspace and services on google platform.",
+            "picture": "github_service.png",
+            "tags": [
+                "ServicePage"
+            ],
+            "links": [
+                {
+                    "link": "https://cloud.google.com",
+                    "title": "Google Cloud",
+                    "icon": "mdi-google"
+                }
+            ]
+        },
+        {
+            "name": "Coding",
+            "title": "Programming",
+            "text": "We write code for you, customize your daily work and automate your business.",
+            "picture": "programming.png",
+            "tags": [
+                "LandingPage"
+            ],
+            "links": [
+                {
+                    "link": "ServicePage",
+                    "router": "true",
+                    "title": "Services",
+                    "icon": "mdi-api"
+                }
+            ]
+        },
+        {
+            "name": "Management",
+            "title": "Management",
+            "text": "We manage services and setup workspaces with famous providers.",
+            "picture": "management.png",
+            "tags": [
+                "LandingPage"
+            ],
+            "links": [
+                {
+                    "link": "ServicePage",
+                    "router": "true",
+                    "title": "Services",
+                    "icon": "mdi-api"
+                }
+            ]
+        },
+        {
+            "name": "Projects",
+            "title": "Projects",
+            "text": "Coding projects on github and other platforms.",
+            "picture": "projects.png",
+            "tags": [
+                "LandingPage"
+            ],
+            "links": [
+                {
+                    "link": "ServicePage",
+                    "router": "true",
+                    "title": "Projects",
+                    "icon": "mdi-api"
+                }
+            ]
+        }
+    ]
+    
+}
