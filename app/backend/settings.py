@@ -166,6 +166,13 @@ CORS_ALLOWED_ORIGINS = [
     "https://"+SERVICE_HOST+':8000',
 ]
 
+CSRF_TRUSTED_ORIGINS=[
+    *CORS_ALLOWED_ORIGINS,
+    "https://*."+SERVICE_HOST,
+    "https://*."+SERVICE_HOST+':8000'
+]
+
+
 CORS_ALLOW_METHODS = (*default_methods,)
 
 CORS_ALLOW_HEADERS = (
