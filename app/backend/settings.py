@@ -33,8 +33,14 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = ["*"]
-SERVICE_HOST = os.environ.get("SERVICE_HOST", "https://gcp-django-xdcyoa6ryq-uc.a.run.app")
+SERVICE_HOST = os.environ.get("SERVICE_HOST", "gcp-django-xdcyoa6ryq-uc.a.run.app")
+ALLOWED_HOSTS = [
+    *os.environ.get("ALLOWED_HOSTS", "localhost,0.0.0.0".split(",")),
+    SERVICE_HOST,
+    "localhost",
+    "groupeffect.github.io",
+    "groupeffect.de",
+    ]
 SERVICE_BRANDING = os.environ.get("SERVICE_BRANDING", "Groupeffect")
 
 
@@ -155,9 +161,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost",
     "https://groupeffect.github.io",
     "https://groupeffect.de",
-    SERVICE_HOST,
-    SERVICE_HOST+':8080',
-    SERVICE_HOST+':8000',
+    "https://"+SERVICE_HOST,
+    "https://"+SERVICE_HOST+':8080',
+    "https://"+SERVICE_HOST+':8000',
 ]
 
 CORS_ALLOW_METHODS = (*default_methods,)
