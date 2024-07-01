@@ -6,8 +6,8 @@ ENV HOST=$HOST
 ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y --no-install-recommends nginx
 WORKDIR /app
-COPY ./app/. .
-COPY ./server/nginx/default.conf /etc/nginx/config.d/default.conf
+COPY app/. /app/.
+COPY server/nginx/default.conf /etc/nginx/conf.d/default.conf
 RUN pip install -r requirements.txt
 EXPOSE $PORT
 EXPOSE 8000

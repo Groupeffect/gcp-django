@@ -70,8 +70,8 @@ class Command(BaseCommand):
         for c in default_cards:
             _tags = c.pop("tags")
             _picture = c.pop("picture")
+            cd = card.CardSerializer(data=c)
             if not model.objects.filter(name=c["name"]).exists():
-                cd = card.CardSerializer(data=c)
                 cd.is_valid(raise_exception=True)
                 cd.save()
                 tags = tagging.TaggingSerializer.Meta.model.objects.filter(name__in=_tags)
@@ -79,20 +79,20 @@ class Command(BaseCommand):
                 self.stdout.write(
                     self.style.SUCCESS(f"card {cd.instance.id} saved to the database")
                 )
+                for picture in pictures.PictureSerializer.Meta.model.objects.filter(
+                        name=_picture
+                    ):
+                    cd.instance.picture=picture
+                    self.stdout.write(
+                        self.style.SUCCESS(f"card {cd.instance.id} tagged with {picture.name}")
+                    )
+                    cd.instance.save()
 
             else:
                 self.stdout.write(
                     self.style.WARNING(f"card {c} already in the database")
                 )
-            # set pictures
-            for picture in pictures.PictureSerializer.Meta.model.objects.filter(
-                    name=_picture
-                ):
-                cd.instance.picture=picture
-                self.stdout.write(
-                    self.style.SUCCESS(f"card {cd.instance.id} tagged with {picture.name}")
-                )
-                cd.instance.save()
+
     def load_json_assets(self):
         """Load assets into the database"""
         model = assets.AssetJsonSerializer.Meta.model
