@@ -34,7 +34,9 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DEBUG", "0") == "1"
 
 ALLOWED_HOSTS = ["*"]
+SERVICE_HOST = os.environ.get("SERVICE_HOST", "https://gcp-django-xdcyoa6ryq-uc.a.run.app")
 SERVICE_BRANDING = os.environ.get("SERVICE_BRANDING", "Groupeffect")
+
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "supabase_url")
 SUPABASE_TOKEN = os.environ.get("SUPABASE_TOKEN", "supabase_token")
@@ -149,9 +151,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8080",
+    "http://localhost:8000",
     "http://localhost",
     "https://groupeffect.github.io",
     "https://groupeffect.de",
+    SERVICE_HOST,
+    SERVICE_HOST+':8080',
+    SERVICE_HOST+':8000',
 ]
 
 CORS_ALLOW_METHODS = (*default_methods,)
