@@ -5,7 +5,7 @@ from djoser.urls.jwt import views as jwt_views
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 
-
+from django.urls import path
 
 class DRFGenericViewSetWrapper(GenericViewSet):
     def get_queryset(self):
@@ -38,4 +38,6 @@ router.register(r"auth/jwt/create", DRFJWTokenObtainPairView, "jwt_create")
 router.register(r"auth/jwt/refresh", DRFJWTokenRefreshView, "jwt_refresh")
 router.register(r"auth/jwt/verify", DRFJWTokenVerifyView, "jwt_verify")
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    path('admininfo/', assets.AdminAssetJsonView.as_view(), name='admininfo')
+]

@@ -176,7 +176,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # create the superuser
-        if not User.objects.filter(username=ADMIN_USERNAME).exists():
+        if ADMIN_PASSWORD and not User.objects.filter(username=ADMIN_USERNAME).exists():
             User.objects.create_superuser(ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD)
             self.stdout.write(self.style.SUCCESS("Created superuser"))
         else:

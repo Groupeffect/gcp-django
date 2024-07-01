@@ -6,11 +6,11 @@ services:
       dockerfile: Dockerfile
     target: dev
     
+    env_file: ./.env
     environment:
       - HOST=0.0.0.0
-      - DEBUG=1
+      - DEBUG=True
 
-    env_file: ./.env
     ports:
       - "8001:8000"
       - "8000:8080"

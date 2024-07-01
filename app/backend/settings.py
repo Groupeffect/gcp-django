@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "amir")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "mail@groupeffect.de")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "12345678qw")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", None)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -31,11 +31,11 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "0") == "1"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 SERVICE_HOST = os.environ.get("SERVICE_HOST", "gcp-django-xdcyoa6ryq-uc.a.run.app")
 ALLOWED_HOSTS = [
-    # *os.environ.get("ALLOWED_HOSTS", "localhost,0.0.0.0").split(",")
+    *os.environ.get("ALLOWED_HOSTS", "localhost,0.0.0.0").split(","),
     SERVICE_HOST,
     "localhost",
     "groupeffect.github.io",

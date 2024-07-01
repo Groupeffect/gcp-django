@@ -16,3 +16,12 @@ bash:
 
 commit_container:
 	podman commit $(CONTAINER_NAME)_1 $(CONTAINER_NAME):latest
+
+build:
+	podman-compose up --build --remove-orphans
+
+up:
+	podman-compose up
+
+down:
+	podman-compose down
