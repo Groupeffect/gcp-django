@@ -5,6 +5,7 @@ ARG HOST=0.0.0.0
 ENV HOST=$HOST
 ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y --no-install-recommends nginx
+RUN mkdir /app
 WORKDIR /app
 COPY app/. /app/.
 COPY server/nginx/default.conf /etc/nginx/conf.d/default.conf
@@ -13,5 +14,5 @@ EXPOSE $PORT
 EXPOSE 8000
 
 FROM base AS prod
-CMD bash /app/start.sh
+CMD bash start.sh
 
