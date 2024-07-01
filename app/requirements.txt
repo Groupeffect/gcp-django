@@ -6,4 +6,6 @@ gunicorn==22.0.0
 djangorestframework-simplejwt
 djoser
 django-filter
+supabase
+psycopg2-binary
 # whitenoise

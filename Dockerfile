@@ -4,7 +4,9 @@ ENV PORT=$PORT
 ARG HOST=0.0.0.0
 ENV HOST=$HOST
 ENV PYTHONUNBUFFERED=1
-RUN apt-get update && apt-get install -y --no-install-recommends nginx
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nginx
+
 RUN mkdir /app
 WORKDIR /app
 COPY app/. /app/.

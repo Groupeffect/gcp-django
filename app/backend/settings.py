@@ -35,7 +35,7 @@ DEBUG = os.environ.get("DEBUG", "0") == "1"
 
 SERVICE_HOST = os.environ.get("SERVICE_HOST", "gcp-django-xdcyoa6ryq-uc.a.run.app")
 ALLOWED_HOSTS = [
-    *os.environ.get("ALLOWED_HOSTS", "localhost,0.0.0.0".split(",")),
+    # *os.environ.get("ALLOWED_HOSTS", "localhost,0.0.0.0").split(",")
     SERVICE_HOST,
     "localhost",
     "groupeffect.github.io",
@@ -46,6 +46,8 @@ SERVICE_BRANDING = os.environ.get("SERVICE_BRANDING", "Groupeffect")
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "supabase_url")
 SUPABASE_TOKEN = os.environ.get("SUPABASE_TOKEN", "supabase_token")
+SUPABASE_JWT = os.environ.get("SUPABASE_JWT", "supabase_jwt_token")
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -100,13 +102,28 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
+SUPABASE_DB =  {
+        'ENGINE': "django.db.backends.postgresql_psycopg2",
+        'HOST': os.environ.get("SUPABASE_DB_HOST", "supabase_host"),
+        'NAME': os.environ.get("SUPABASE_DB_NAME", "supabase_name"),
+        'USER': os.environ.get("SUPABASE_DB_USER", "supabase_user"),
+        'PASSWORD': os.environ.get("SUPABASE_DB_PASSWORD", "supabase_password"),
+        'PORT': os.environ.get("SUPABASE_DB_PORT", "6543"),
+}
+
+DEFAULT_DB =  {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-}
 
+if os.environ.get("SUPABASE_DB_PASSWORD", False):
+    DATABASES = {
+        "default":  SUPABASE_DB,
+    }
+else:
+    DATABASES = {
+        "default": DEFAULT_DB,
+    }   
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
