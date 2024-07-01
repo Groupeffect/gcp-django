@@ -10,8 +10,6 @@ COPY ./app/. .
 COPY ./server/nginx/default.conf /etc/nginx/config.d/default.conf
 RUN pip install -r requirements.txt
 EXPOSE $PORT
-EXPOSE 80
-
 
 FROM base AS prod
 CMD bash start.sh
