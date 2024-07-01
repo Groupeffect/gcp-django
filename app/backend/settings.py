@@ -31,12 +31,9 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "0") == "1"
 
 ALLOWED_HOSTS = ["*"]
-SERVICE_BASE_URL = os.environ.get(
-    "SERVICE_BASE_URL", "http://localhost:" + os.environ.get("PORT", "8080")
-)
 SERVICE_BRANDING = os.environ.get("SERVICE_BRANDING", "Groupeffect")
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "supabase_url")
@@ -153,6 +150,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8080",
     "http://localhost",
+    "https://groupeffect.github.io",
+    "https://groupeffect.de",
 ]
 
 CORS_ALLOW_METHODS = (*default_methods,)
